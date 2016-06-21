@@ -1,0 +1,20 @@
+<VirtualHost _default_:*>
+	ServerAdmin webmaster@localhost
+	#ServerName www.example.com
+	DocumentRoot /var/hello
+
+	AddHandler cgi-script .cgi .pl
+	DirectoryIndex index.cgi index.htm index.html index.php index.pl;
+
+	<Directory /var/hello>
+		AllowOverride All
+		IndexOptions +XHTML
+		Options Indexes FollowSymLinks MultiViews ExecCGI
+		Require all granted
+	</Directory>
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
