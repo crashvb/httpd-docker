@@ -17,12 +17,9 @@ None.
 ├─ etc/
 │  ├─ apache2/
 │  │  ├─ conf-available/
-│  │  │  └─ php5-fpm.conf
+│  │  │  └─ php7-fpm.conf
 │  │  └─ sites-available/
 │  │     └─ 000-default.conf
-│  ├─ php5/
-│  │  └─ fpm/
-│  │     └─ php.ini
 │  └─ supervisor/
 │     └─ config.d/
 │        ├─ apache2.conf
