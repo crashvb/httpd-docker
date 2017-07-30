@@ -1,0 +1,21 @@
+# Setup: cgi, perl
+AddHandler cgi-script .cgi .pl
+
+# Setup: python
+WSGIScriptAlias /hellopy /var/www/hello/hello.py
+
+# Setup: eruby, ruby
+Action application/x-httpd-erb /cgi-bin/erb.rb
+AddHandler cgi-script .rb
+AddHandler application/x-httpd-erb .erb .rhtml
+
+# Setup: webroot
+Alias /hello /var/www/hello
+<Directory /var/www/hello>
+  Options +Indexes +FollowSymLinks +MultiViews +ExecCGI
+  IndexOptions +XHTML
+
+  AllowOverride All
+  Order allow,deny
+  allow from all
+</Directory>

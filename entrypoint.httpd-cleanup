@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+# Configure: httpd-cleanup
+# Note: Do not check $EP_RUN, as we want to run every time ...
+if [[ -d /run/apache2 ]] ; then
+	log "Cleaning up for reentrant containers ..."
+	rm --force --recursive /run/apache2/*
+fi
+
