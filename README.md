@@ -10,7 +10,11 @@ This image has embedded sample scripts that can be used to test the deployment o
 
 ## Entrypoint Scripts
 
-None.
+### httpd-cleanup
+
+The embedded entrypoint script is located at `/etc/entrypoint.d/httpd-cleanup` and performs the following actions:
+
+1. The contents under `/run/apache2/` are purged.
 
 ## Standard Configuration
 
