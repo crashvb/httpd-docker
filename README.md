@@ -1,5 +1,10 @@
 # httpd-docker
 
+[![version)](https://img.shields.io/docker/v/crashvb/httpd/latest)](https://hub.docker.com/repository/docker/crashvb/httpd)
+[![image size](https://img.shields.io/docker/image-size/crashvb/httpd/latest)](https://hub.docker.com/repository/docker/crashvb/httpd)
+[![linting](https://img.shields.io/badge/linting-hadolint-yellow)](https://github.com/hadolint/hadolint)
+[![license](https://img.shields.io/github/license/crashvb/httpd-docker.svg)](https://github.com/crashvb/httpd-docker/blob/master/LICENSE.md)
+
 ## Overview
 
 This docker image contains [httpd](https://httpd.apache.org/) with [cgi](https://en.wikipedia.org/wiki/Common_Gateway_Interface), [eruby](https://en.wikipedia.org/wiki/ERuby), [php](https://php.net/), and [python](https://www.python.org/).
