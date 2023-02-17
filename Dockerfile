@@ -1,10 +1,10 @@
-FROM crashvb/supervisord:202201080446@sha256:8fe6a411bea68df4b4c6c611db63c22f32c4a455254fa322f381d72340ea7226
+FROM crashvb/supervisord:202302172130@sha256:c3ca0e25621af7c6bc594a0469d1ed763b4868f8fc5ceabaac384bd4c2496834
 ARG org_opencontainers_image_created=undefined
 ARG org_opencontainers_image_revision=undefined
 LABEL \
 	org.opencontainers.image.authors="Richard Davis <crashvb@gmail.com>" \
-	org.opencontainers.image.base.digest="sha256:8fe6a411bea68df4b4c6c611db63c22f32c4a455254fa322f381d72340ea7226" \
-	org.opencontainers.image.base.name="crashvb/supervisord:202201080446" \
+	org.opencontainers.image.base.digest="sha256:c3ca0e25621af7c6bc594a0469d1ed763b4868f8fc5ceabaac384bd4c2496834" \
+	org.opencontainers.image.base.name="crashvb/supervisord:202302172130" \
 	org.opencontainers.image.created="${org_opencontainers_image_created}" \
 	org.opencontainers.image.description="Image containing httpd." \
 	org.opencontainers.image.licenses="Apache-2.0" \
@@ -14,13 +14,13 @@ LABEL \
 	org.opencontainers.image.url="https://github.com/crashvb/httpd-docker"
 
 # Install packages, download files ...
-RUN APT_ALL_REPOS=1 docker-apt apache2 libapache2-mod-fcgid libapache2-mod-wsgi php-apcu php-cli php-fpm ruby
+RUN APT_ALL_REPOS=1 docker-apt apache2 libapache2-mod-fcgid libapache2-mod-wsgi-py3 php-apcu php-cli php-fpm ruby
 
 # Configure: httpd
 RUN echo "Include vhost.d/" >> /etc/apache2/apache2.conf && \
 	mkdir --parents /etc/apache2/vhost.d/ && \
 	ln --symbolic /usr/lib/cgi-bin /var/www/cgi-bin && \
-	a2enconf php7.2-fpm && \
+	a2enconf php8.1-fpm && \
 	a2enmod actions cgid proxy_fcgi setenvif wsgi
 
 # Configure: hello
