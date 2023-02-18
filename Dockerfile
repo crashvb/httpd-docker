@@ -19,12 +19,24 @@ RUN APT_ALL_REPOS=1 docker-apt apache2 libapache2-mod-fcgid libapache2-mod-wsgi-
 # Configure: httpd
 RUN echo "Include vhost.d/" >> /etc/apache2/apache2.conf && \
 	mkdir --parents /etc/apache2/vhost.d/ && \
+	mv /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf.dist && \
 	ln --symbolic /usr/lib/cgi-bin /var/www/cgi-bin && \
 	a2enconf php8.1-fpm && \
-	a2enmod actions cgid proxy_fcgi setenvif wsgi
+	a2enmod actions cgid proxy_fcgi rewrite setenvif ssl wsgi && \
+	a2ensite default-ssl && \
+	sed --expression="s/ssl-cert-snakeoil/httpd/g" \
+		--expression="s/\.pem/.crt/g" \
+		--expression="/CustomLog/cCustomLog /dev/stdout combined" \
+		--expression="/ErrorLog/d" \
+		--in-place=.dist /etc/apache2/sites-available/default-ssl.conf && \
+	sed --expression="/CustomLog/cCustomLog /dev/stdout vhost_combined" \
+		--in-place=.dist /etc/apache2/conf-available/other-vhosts-access-log.conf && \
+	sed --expression="/^ErrorLog/cErrorLog /dev/stderr" \
+		--in-place=.dist /etc/apache2/apache2.conf
 
 # Configure: hello
 COPY apache.hello /etc/apache2/vhost.d/hello
+COPY apache.000-default.conf /etc/apache2/sites-available/000-default.conf
 COPY erb.rb /usr/lib/cgi-bin/
 COPY hello.* /var/www/hello/
 
@@ -36,6 +48,7 @@ COPY supervisord.apache2.conf /etc/supervisor/conf.d/apache2.conf
 COPY supervisord.php.conf /etc/supervisor/conf.d/php.conf
 
 # Configure: entrypoint
+COPY entrypoint.httpd /etc/entrypoint.d/httpd
 COPY entrypoint.httpd-cleanup /etc/entrypoint.d/httpd-cleanup
 
 # Configure: healthcheck

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e -o pipefail
+
+# Configure: httpd
+if [[ ! -e "${EP_RUN}" ]] ; then
+	log "Configuring $(basename "${0}") for first run ..."
+
+	# Generate keypairs ...
+	generate_rsakey httpd
+
+	ln --symbolic /etc/ssl/certs/httpdca.crt /usr/share/ca-certificates/
+	echo httpdca.crt >> /etc/ca-certificates.conf
+	update-ca-certificates
+fi
+

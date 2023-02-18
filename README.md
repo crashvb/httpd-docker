@@ -36,6 +36,11 @@ The embedded entrypoint script is located at `/etc/entrypoint.d/httpd-cleanup` a
 │        ├─ apache2.conf
 │        ├─ fcgi.conf
 │        └─ php.conf
+├─ run/
+│  └─ secrets/
+│     ├─ httpd.crt
+│     ├─ httpd.key
+│     └─ httpdca.crt
 ├─ usr/
 │  └─ lib/
 │     └─ cgi-bin/
