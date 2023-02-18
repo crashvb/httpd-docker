@@ -38,4 +38,8 @@ COPY supervisord.php.conf /etc/supervisor/conf.d/php.conf
 # Configure: entrypoint
 COPY entrypoint.httpd-cleanup /etc/entrypoint.d/httpd-cleanup
 
+# Configure: healthcheck
+COPY healthcheck.apache2 /etc/healthcheck.d/apache2
+COPY healthcheck.php /etc/healthcheck.d/php
+
 EXPOSE 80/tcp 443/tcp
