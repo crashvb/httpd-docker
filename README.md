@@ -15,11 +15,31 @@ This image has embedded sample scripts that can be used to test the deployment o
 
 ## Entrypoint Scripts
 
+### httpd
+
+The embedded entrypoint script is located at `/etc/entrypoint.d/httpd` and performs the following actions:
+
+1. The PKI certificates are generated or imported.
+
 ### httpd-cleanup
 
 The embedded entrypoint script is located at `/etc/entrypoint.d/httpd-cleanup` and performs the following actions:
 
 1. The contents under `/run/apache2/` are purged.
+
+## Healthcheck Scripts
+
+### apache2
+
+The embedded healthcheck script is located at `/etc/healthcheck.d/apache2` and performs the following actions:
+
+1. Verifies that apache2 is operational.
+
+### php
+
+The embedded healthcheck script is located at `/etc/healthcheck.d/php` and performs the following actions:
+
+1. Verifies that php is operational.
 
 ## Standard Configuration
 
@@ -31,6 +51,12 @@ The embedded entrypoint script is located at `/etc/entrypoint.d/httpd-cleanup` a
 │  ├─ apache2/
 │  │  └─ vhosts.d/
 │  │     └─ hello
+│  ├─ entrypoint.d/
+│  │  ├─ httpd
+│  │  └─ httpd-cleanup
+│  ├─ healthcheck.d/
+│  │  ├─ apache2
+│  │  └─ php
 │  └─ supervisor/
 │     └─ config.d/
 │        ├─ apache2.conf
