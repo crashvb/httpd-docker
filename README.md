@@ -27,20 +27,6 @@ The embedded entrypoint script is located at `/etc/entrypoint.d/httpd-cleanup` a
 
 1. The contents under `/run/apache2/` are purged.
 
-## Healthcheck Scripts
-
-### apache2
-
-The embedded healthcheck script is located at `/etc/healthcheck.d/apache2` and performs the following actions:
-
-1. Verifies that apache2 is operational.
-
-### php
-
-The embedded healthcheck script is located at `/etc/healthcheck.d/php` and performs the following actions:
-
-1. Verifies that php is operational.
-
 ## Standard Configuration
 
 ### Container Layout
